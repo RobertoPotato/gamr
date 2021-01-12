@@ -1,12 +1,16 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { loadDetail } from '../actions/detaisActions';
+import { Link } from 'react-router-dom';
 
 const StyledGame = styled(motion.div)`
   min-height: 30vh;
   box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
   text-align: center;
   border-radius: 1rem;
+  cursor: pointer;
   img {
     width: 100%;
     height: 40vh;
@@ -14,12 +18,20 @@ const StyledGame = styled(motion.div)`
   }
 `;
 
+//TODO return the src value to the img component
 const Game = ({ name, released, id, image }) => {
+  const dispatch = useDispatch();
+  const loadDetailHandler = () => {
+    dispatch(loadDetail(id));
+  };
+
   return (
-    <StyledGame>
-      <h3>{name}</h3>
-      <p>{released}</p>
-      <img src={image} alt={name}></img>
+    <StyledGame onClick={loadDetailHandler}>
+      <Link to={`/game/${id}`}>
+        <h3>{name}</h3>
+        <p>{released}</p>
+        <img src='' alt={name}></img>
+      </Link>
     </StyledGame>
   );
 };
