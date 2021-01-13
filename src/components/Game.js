@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { loadDetail } from '../actions/detaisActions';
 import { Link } from 'react-router-dom';
+import { smallImage } from '../utils';
 
 //TODO return the src value to the img component
 const Game = ({ name, released, id, image }) => {
@@ -18,7 +19,7 @@ const Game = ({ name, released, id, image }) => {
       <Link to={`/game/${id}`}>
         <h3>{name}</h3>
         <p>{released}</p>
-        <img src={image} alt={name}></img>
+        <img src={smallImage(image, 640)} alt={name}></img>
       </Link>
     </StyledGame>
   );
